@@ -9,7 +9,7 @@ const Genai = () => {
   useEffect(() => {
     (async () => {
       try {
-        const res = await fetch("/api/genai", {
+        const res = await fetch("/api/text", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ question: "Why is the sky blue?" }),

@@ -9,5 +9,6 @@ export async function POST(req: NextRequest) {
     model: "gemini-2.5-flash",
     contents: question,
   });
+  console.log("server res:", response);
   return NextResponse.json({ answer: response.text });
 }
