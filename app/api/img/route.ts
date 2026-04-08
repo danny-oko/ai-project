@@ -4,7 +4,6 @@ import { NextRequest, NextResponse } from "next/server";
 export async function POST(request: NextRequest) {
   try {
     const { prompt } = await request.json();
-    console.log("Prompt:", prompt);
 
     if (!prompt) {
       return NextResponse.json(
@@ -16,8 +15,6 @@ export async function POST(request: NextRequest) {
     const ai = new GoogleGenAI({
       apiKey: process.env.GENAI_API_KEY,
     });
-
-    console.log(ai);
 
     const response = await ai.models.generateContent({
       model: "gemini-3.1-flash-image-preview",
@@ -35,7 +32,6 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    console.log(result);
 
     return NextResponse.json(result);
   } catch (error) {
