@@ -10,11 +10,11 @@ const FEATURES = [
     disabled: false,
   },
   {
-    href: "#",
+    href: "/models/chat",
     icon: "💬",
     label: "AI Chat",
     description: "Conversational AI with context and memory.",
-    disabled: true,
+    disabled: false,
   },
   {
     href: "#",
