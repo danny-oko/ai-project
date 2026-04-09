@@ -24,7 +24,7 @@ const FEATURES = [
     disabled: false,
   },
   {
-    href: "#",
+    href: "/models/dish-analysis",
     icon: "🔍",
     label: "Image Analysis",
     description: "Describe the food, and AI will detect the ingredients.",
