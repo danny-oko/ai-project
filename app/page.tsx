@@ -13,15 +13,22 @@ const FEATURES = [
     href: "/models/chat",
     icon: "💬",
     label: "AI Chat",
-    description: "Conversational AI with context and memory.",
+    description: "Conversational AI",
     disabled: false,
   },
   {
     href: "#",
-    icon: "📄",
-    label: "Document Analysis",
-    description: "Upload and query any PDF or document instantly.",
-    disabled: true,
+    icon: "🔍",
+    label: "Image Analysis",
+    description: "Upload a food photo, and AI will detect the ingredients.",
+    disabled: false,
+  },
+  {
+    href: "#",
+    icon: "🔍",
+    label: "Ingredients Analysis",
+    description: "Describe the food, and AI will detect the ingredients.",
+    disabled: false,
   },
 ];
 

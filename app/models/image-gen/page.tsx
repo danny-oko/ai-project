@@ -2,8 +2,9 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
 
-// Define a unified Message type to avoid TS errors
 type Message = {
   role: "user" | "assistant";
   text?: string;
@@ -94,7 +95,6 @@ export default function ImageGenPage() {
 
   return (
     <div className="flex flex-col h-screen bg-[#131314] text-white font-sans">
-      {/* Header */}
       <header className="flex items-center justify-between px-4 py-3 border-b border-white/10 shrink-0">
         <button
           onClick={() => router.push("/")}
@@ -105,13 +105,11 @@ export default function ImageGenPage() {
         <span className="text-sm font-medium text-[#9aa0a6]">
           AI Image Studio
         </span>
-        <div className="w-16" /> {/* Spacer */}
+        <div className="w-16" />
       </header>
 
-      {/* Main Chat Area */}
       <div className="flex-1 overflow-y-auto">
         {messages.length === 0 ? (
-          /* Empty State / Welcome */
           <div className="flex flex-col items-center justify-center h-full gap-6 px-4 text-center">
             <div>
               <h2 className="text-3xl font-semibold tracking-tight mb-2">
@@ -134,7 +132,6 @@ export default function ImageGenPage() {
             </div>
           </div>
         ) : (
-          /* Message List */
           <div className="max-w-2xl mx-auto w-full px-4 py-8 flex flex-col gap-8">
             {messages.map((msg, i) => (
               <div
@@ -143,7 +140,6 @@ export default function ImageGenPage() {
                   msg.role === "user" ? "flex-row-reverse" : "flex-row"
                 }`}
               >
-                {/* Avatar */}
                 <div
                   className={`w-8 h-8 rounded-full shrink-0 flex items-center justify-center text-[10px] font-bold ${
                     msg.role === "user"
@@ -154,7 +150,6 @@ export default function ImageGenPage() {
                   {msg.role === "user" ? "U" : "AI"}
                 </div>
 
-                {/* Content */}
                 <div
                   className={`flex flex-col gap-2 max-w-[80%] ${msg.role === "user" ? "items-end" : "items-start"}`}
                 >
@@ -203,40 +198,40 @@ export default function ImageGenPage() {
         )}
       </div>
 
-      {/* Input Section */}
       <div className="shrink-0 px-4 pb-8 pt-4">
         <div className="max-w-2xl mx-auto">
-          <div className="flex items-end gap-3 bg-[#1e1f20] rounded-[28px] px-5 py-3 border border-white/5 focus-within:border-white/20 transition-all shadow-xl">
-            <textarea
+          <div className="relative flex items-end gap-2 bg-[#1e1f20] rounded-3xl px-4 py-3 border border-white/10 ring-1 ring-transparent focus-within:ring-white/20 focus-within:border-white/20 transition-all duration-200 shadow-[0_0_0_1px_rgba(255,255,255,0.04),0_8px_32px_rgba(0,0,0,0.4)]">
+            <Textarea
               ref={textareaRef}
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
               placeholder="Describe what you want to see..."
               rows={1}
-              className="flex-1 bg-transparent outline-none text-base text-white placeholder:text-[#5f6368] resize-none max-h-40 py-1"
+              className="flex-1 bg-transparent border-0 shadow-none outline-none focus-visible:ring-0 focus-visible:ring-offset-0 text-[15px] text-white placeholder:text-white/25 resize-none max-h-40 py-1 px-1 leading-relaxed"
             />
-            <button
+            <Button
               onClick={handleSend}
               disabled={!input.trim() || loading}
-              className="shrink-0 w-10 h-10 rounded-full bg-white flex items-center justify-center transition-all hover:scale-105 active:scale-95 disabled:opacity-10 disabled:hover:scale-100"
+              size="icon"
+              className="shrink-0 h-9 w-9 rounded-2xl bg-white hover:bg-white/90 text-[#131314] shadow-md transition-all duration-150 hover:scale-105 active:scale-95 disabled:opacity-20 disabled:hover:scale-100 disabled:cursor-not-allowed"
             >
               <svg
-                width="20"
-                height="20"
+                width="16"
+                height="16"
                 viewBox="0 0 24 24"
                 fill="none"
-                stroke="#131314"
+                stroke="currentColor"
                 strokeWidth="2.5"
                 strokeLinecap="round"
                 strokeLinejoin="round"
               >
-                <line x1="22" y1="2" x2="11" y2="13"></line>
-                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                <line x1="22" y1="2" x2="11" y2="13" />
+                <polygon points="22 2 15 22 11 13 2 9 22 2" />
               </svg>
-            </button>
+            </Button>
           </div>
-          <p className="text-center text-[10px] text-[#5f6368] mt-3 tracking-wide">
+          <p className="text-center text-[10px] text-white/20 mt-3 tracking-widest uppercase">
             Powered by Gemini · Shift + Enter for new line
           </p>
         </div>

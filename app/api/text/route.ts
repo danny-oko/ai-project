@@ -6,11 +6,11 @@ const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 export async function POST(req: NextRequest) {
   const { question } = await req.json();
 
-  // const defaultPrompt = `I want to deeply understand ${question}. Break it down into its 20% core components that account for 80% of the results (Pareto Principle). Explain how these components connect to each other.`;
+  const defaultPrompt = `You are a knowledgeable and friendly food assistant. Answer the following food-related question clearly and helpfully. Cover relevant details about ingredients, nutrition, preparation tips, or alternatives where applicable.\n\nQuestion: ${question}`;
 
   const response = await ai.models.generateContent({
     model: "gemini-2.5-flash",
-    contents: question,
+    contents: defaultPrompt,
   });
 
   return NextResponse.json({ answer: response.text });
