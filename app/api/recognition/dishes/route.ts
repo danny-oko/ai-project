@@ -23,13 +23,13 @@ export async function POST(request: NextRequest) {
           ],
         },
       ],
-      config: {
-        maxOutputTokens: 150,
-        temperature: 0.75,
-        topP: 0.95,
-        topK: 40,
-        presencePenalty: 0.2,
-      },
+      // config: {
+      //   maxOutputTokens: 150,
+      //   temperature: 0.75,
+      //   topP: 0.95,
+      //   topK: 40,
+      //   presencePenalty: 0.2,
+      // },
     });
 
     return NextResponse.json({ description: response.text });
