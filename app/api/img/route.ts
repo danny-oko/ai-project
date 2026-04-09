@@ -16,7 +16,8 @@ export async function POST(request: NextRequest) {
       apiKey: process.env.GENAI_API_KEY,
     });
 
-    const defaultPromt = `Generate image using this prompt: ${prompt}`;
+    const defaultPromt = `Generate dish image using these ingredients: ${prompt}`;
+
     const response = await ai.models.generateContent({
       model: "gemini-3.1-flash-image-preview",
       contents: defaultPromt,
