@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Didy AI",
+  title: "Food assistant - AI",
   description: "Your daily food assistant",
 };
 
