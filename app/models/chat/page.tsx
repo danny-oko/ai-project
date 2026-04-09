@@ -1,12 +1,15 @@
 "use client";
+
 import { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
+import ReactMarkdown from "react-markdown";
 
 export default function page() {
   const router = useRouter();
   const [question, setQuestion] = useState("");
+
   const [messages, setMessages] = useState<
     { role: "user" | "assistant"; content: string }[]
   >([]);
@@ -23,7 +26,6 @@ export default function page() {
     scrollToBottom();
   }, [messages]);
 
-  // Auto-resize textarea height
   useEffect(() => {
     const ta = textareaRef.current;
     if (!ta) return;
@@ -86,7 +88,9 @@ export default function page() {
         >
           ← Back
         </button>
-        <span className="text-sm font-medium text-[#9aa0a6]">Food analyst</span>
+        <span className="text-sm font-medium text-[#9aa0a6]">
+          Food Assistant
+        </span>
         <div className="w-16" />
       </header>
 
@@ -98,7 +102,6 @@ export default function page() {
               <h2 className="text-3xl font-semibold tracking-tight mb-2">
                 What would you like to know about food?
               </h2>
-
               <p className="text-[#9aa0a6] text-sm">
                 Ask about recipes, nutrition, ingredients, or meal ideas.
               </p>
@@ -144,13 +147,68 @@ export default function page() {
                   }`}
                 >
                   <div
-                    className={`rounded-2xl px-4 py-2.5 text-sm leading-relaxed whitespace-pre-wrap ${
+                    className={`rounded-2xl px-4 py-2.5 text-sm leading-relaxed ${
                       msg.role === "user"
                         ? "bg-[#1e1f20] text-white"
                         : "text-[#e8eaed]"
                     }`}
                   >
-                    {msg.content}
+                    {msg.role === "assistant" ? (
+                      <ReactMarkdown
+                        components={{
+                          h1: ({ children }) => (
+                            <h1 className="text-base font-bold text-white mt-4 mb-1.5 first:mt-0">
+                              {children}
+                            </h1>
+                          ),
+                          h2: ({ children }) => (
+                            <h2 className="text-sm font-bold text-white mt-4 mb-1.5 first:mt-0">
+                              {children}
+                            </h2>
+                          ),
+                          h3: ({ children }) => (
+                            <h3 className="text-sm font-semibold text-white/90 mt-3 mb-1 first:mt-0">
+                              {children}
+                            </h3>
+                          ),
+                          strong: ({ children }) => (
+                            <strong className="font-semibold text-white">
+                              {children}
+                            </strong>
+                          ),
+                          em: ({ children }) => (
+                            <em className="italic text-white/70">{children}</em>
+                          ),
+                          ul: ({ children }) => (
+                            <ul className="space-y-1 my-2 ml-1">{children}</ul>
+                          ),
+                          ol: ({ children }) => (
+                            <ol className="space-y-1 my-2 ml-1 list-decimal list-inside">
+                              {children}
+                            </ol>
+                          ),
+                          li: ({ children }) => (
+                            <li className="flex items-start gap-2 text-[#e8eaed]">
+                              <span className="mt-1.5 w-1 h-1 rounded-full bg-white/30 shrink-0" />
+                              <span>{children}</span>
+                            </li>
+                          ),
+                          p: ({ children }) => (
+                            <p className="mb-2 last:mb-0">{children}</p>
+                          ),
+                          hr: () => <hr className="border-white/10 my-3" />,
+                          code: ({ children }) => (
+                            <code className="bg-white/10 rounded px-1 py-0.5 text-xs font-mono text-white/80">
+                              {children}
+                            </code>
+                          ),
+                        }}
+                      >
+                        {msg.content}
+                      </ReactMarkdown>
+                    ) : (
+                      msg.content
+                    )}
                   </div>
                 </div>
               </div>

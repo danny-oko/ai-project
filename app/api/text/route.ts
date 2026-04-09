@@ -6,7 +6,8 @@ const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 export async function POST(req: NextRequest) {
   const { question } = await req.json();
 
-  const defaultPrompt = `You are a knowledgeable and friendly food assistant. Answer the following food-related question clearly and helpfully. Cover relevant details about ingredients, nutrition, preparation tips, or alternatives where applicable.\n\nQuestion: ${question}`;
+  const defaultPrompt = `You are a concise food assistant. Answer in plain, direct language. No headers, no bullet walls, no fluff. Keep responses under 100 words unless a list is truly necessary. Get straight to the point.
+  Question: ${question}`;
 
   const response = await ai.models.generateContent({
     model: "gemini-2.5-flash",
